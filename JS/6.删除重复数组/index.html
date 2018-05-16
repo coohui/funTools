@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>数组去重</title>
+<script>
+var arr=[1,2,2,2,3,4,6];
+//删除重复的
+   function DeleteArr(arr){
+	   for ( var i=0; i<arr.length; i++ ) {
+		  for ( var j=i+1; j<arr.length; j++ ) {
+			  if ( arr[i] == arr[j] ) {
+				   arr.splice( j, 1 );
+				  j--;
+			  }
+		  }
+	  }
+   }
+//方法二
+   function DeleteArr2(arr){
+   	  var map={};
+   	  var newArr=[];
+   	  var len=arr.length;
+   	  for(var i=0;i<len;i++){
+          if(!map[arr[i]]){
+             map[arr[i]]=true;
+             newArr.push(arr[i]);
+          }
+   	  }
+       return newArr;
+   }
+alert(DeleteArr2(arr));
+</script>
+</head>
+<body>
+</body>
+</html>

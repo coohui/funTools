@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+function aa(){
+  var s=0;
+  var d=0;
+ // 记录执行的起始时间
+ s = new Date().getTime();
+ var arr=[];
+ var str="";
+ for(var i=1950;i<2016000;i++)
+ {
+	 str+=i+",";
+ }
+  arr=str.split(",");
+  // 记录执行的结束时间
+  d = new Date().getTime();
+  console.log("计算结果:aa()耗时：" + (d-s) + "毫秒")
+}
+
+function bb(){
+  var s=0;
+  var e=0;
+ // 记录执行的起始时间
+ s = new Date().getTime();
+ var arr=[];
+ for(var i=1950;i<2016000;i++)
+ {
+	arr.push(i);
+ }
+ //alert(arr.length)
+  // 记录执行的结束时间
+  d = new Date().getTime();
+  console.log("计算结果:bb()耗时：" + (d-s) + "毫秒")
+}
+aa();
+bb();
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>获取元素当前位置</title>
+<script>
+/*function getLeft(obj) {
+		  var iLeft = 0;
+		  while(obj) {
+			  iLeft += obj.offsetLeft;
+			  obj = obj.offsetParent;
+		  }
+		  return iLeft;
+ }*/
+ function getPos(obj) {
+		
+		var pos = {left:0, top:0};
+		
+		while (obj) {
+			pos.left += obj.offsetLeft;
+			pos.top += obj.offsetTop;
+			obj = obj.offsetParent;
+		}
+		
+		return pos;
+		
+	}
+
+</script>
+</head>
+<body>
+</body>
+</html>

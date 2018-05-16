@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>滚动条兼容处理</title>
+<style>
+#scroll {width:600px;height:300000px; background:red; _position:absolute;}
+
+</style>
+<script>
+window.onload=function(){
+/**
+	 * 滚动条兼容处理
+	 * @param id 滚动区域元素的id
+	 */
+	 //var oScroll=document.getElementById("scroll");
+	 //var oScroll="";
+	// myscroll("scroll");
+	function myscroll(id){
+		var scrollStartPos = 0, scrollStartPosX = 0;
+		document.getElementById(id).addEventListener("touchstart", function(event) {
+			scrollStartPos = this.scrollTop + event.touches[0].pageY;
+			scrollStartPosX = this.scrollLeft + event.touches[0].pageX;
+			event.preventDefault();
+		},false);
+
+		document.getElementById(id).addEventListener("touchmove", function(event) {
+			this.scrollTop = scrollStartPos - event.touches[0].pageY;
+			this.scrollLeft = scrollStartPosX - event.touches[0].pageX;
+			event.preventDefault();
+		},false);
+	}
+}
+</script>
+</head>
+<body>
+<div style="height:300px; width:600px; overflow:scroll;">
+   <div id="scroll">ghfgh</div>
+</div>
+</body>
+</html>

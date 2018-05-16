@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+    var myDistName =[{"id":1, "name":"a",
+                "children":[{
+                    "id":2,
+                    "name":"b"
+                }]
+             }
+            ];
+    var resultMap = {};
+    var buildDistIdName = function (child) {
+        resultMap[child.id] = child.name;
+        if (!child.children || !child.children.length) return;
+        for (var i = 0, len = child.children.length; i < len; i++) {
+            buildDistIdName(child.children[i]);
+        }
+    };
+
+    for (var i = 0, len = myDistName.length; i < len; i++) {
+        buildDistIdName(myDistName[i])
+    }
+    console.log(resultMap);
+</script>
+</head>
+<body>
+</body>
+</html>

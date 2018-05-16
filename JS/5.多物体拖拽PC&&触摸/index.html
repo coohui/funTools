@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+body{ padding:100px; margin:0 auto; width:1000px;}
+img{ border:none; outline:none; margin:0; padding:0;}
+
+#fiterCarats {width:210px; height:60px; background:url(images/dragbg.jpg) 0 4px repeat-x; position:relative;}
+#div2 {width:20px; height: 30px; background:url(images/drag_on.jpg) no-repeat; position: absolute; left:0; top:-6px;}
+#div22 {width:20px; height: 30px;background:url(images/drag_on.jpg) no-repeat; position: absolute; left:191px;top:-6px;}
+
+#CaratsValuePlace{width:210px; height:30px;position: absolute; left:0; top:26px;}
+
+#fiterPrice{width:220px; height:130px; background:url(images/dragbg.jpg) 0 4px repeat-x;  position:relative;}
+#div7 {width:20px; height: 30px; background:url(images/drag_on.jpg) no-repeat; position: absolute; left:0; top:-6px;}
+#div8 {width:20px; height: 30px;background:url(images/drag_on.jpg) no-repeat; position: absolute; left:200px;top:-6px;}
+
+#PriceValuePlace {width:220px; height:30px;position:relative; left:0; top:26px;}
+#count1 ,#count2 ,#count3 ,#count4{outline:none; border:none; width:60px; display:block; line-height:24px; font-size:14px; position:absolute}
+#count1 ,#count3{ left:0;}
+#count2 ,#count4{ right:0; text-align:right}
+</style> 
+<script>
+window.onload =function(){ 
+      drag("div2","count1",15,"fiterCarats","div22",100);
+	  drag("div22","count2",15,"fiterCarats","div2",100);
+	  
+	  drag("div7","count3",500000,"fiterPrice","div8",1);
+	  drag("div8","count4",500000,"fiterPrice","div7",1);
+	  
+	  TouchDrag("div2","count1",15,"fiterCarats","div22",100);
+	  TouchDrag("div22","count2",15,"fiterCarats","div2",100);
+	  
+	  TouchDrag("div7","count3",500000,"fiterPrice","div8",1);
+	  TouchDrag("div8","count4",500000,"fiterPrice","div7",1);
+	  	
+     function drag(obj,count,value,parent,target,Scan) {
+		var oTarget = document.getElementById(target);
+		var oParent = document.getElementById(parent);
+		var obj = document.getElementById(obj);
+		var count= document.getElementById(count);
+		
+		obj.onmousedown = function(ev) {
+			var ev = ev || event;
+			if(obj.offsetLeft<oTarget.offsetLeft)
+				{
+					var iMax =getLeft(oTarget)-obj.offsetWidth;
+					var Min=0;
+				}else
+				{
+					 var iMax =oParent.offsetWidth+getLeft(oParent);
+					 var Min=oTarget.offsetLeft+oTarget.offsetWidth;
+				}
+			
+			 var disX =ev.clientX- this.offsetLeft;
+			 
+			if ( obj.setCapture ) {
+				obj.setCapture();
+			}
+			
+			document.onmousemove = function(ev) {
+				var ev = ev || event;
+				
+				var L = ev.clientX - disX;
+				if(obj.offsetLeft<oTarget.offsetLeft)
+				{
+					if ( L < Min ) {
+					   L = Min;
+					} else if ( ev.clientX > iMax) {
+						L =iMax-getLeft(oParent);
+					}
+					var iMaxLeft = oParent.offsetWidth - 2*obj.offsetWidth;
+					var iScale =L/iMaxLeft;
+				}else
+				{
+					if ( L < Min ) {
+					   L = Min;
+					} else if ( ev.clientX > iMax) {
+						L = oParent.offsetWidth- obj.offsetWidth;
+					}
+					var iMaxLeft = oParent.offsetWidth - 2*obj.offsetWidth;
+					var iScale =(L-obj.offsetWidth)/iMaxLeft;
+				}
+				obj.style.left = L + 'px';
+				if(iScale>1)
+				{
+					iScale=1;
+				}
+				count.value=parseFloat(parseInt(iScale*Scan*value)/Scan).toLocaleString();
+			}
+			
+			document.onmouseup =document.ontouchup=function() {
+				document.onmousemove = document.onmouseup = null;  
+				//释放全局捕获 releaseCapture();
+				if ( obj.releaseCapture ) {
+					obj.releaseCapture();
+				}
+			}
+			return false;
+		}
+	}
+	
+	  function TouchDrag(obj,count,value,parent,target,Scan){
+		  var oParent = document.getElementById(parent);
+		  var obj=document.getElementById(obj);
+		  var oTarget=document.getElementById(target);
+		  var count= document.getElementById(count);
+		  var DisX=null;
+		  var iMax=null;
+		  var Min=null;
+		  var iMaxLeft=0;
+		  var iScale=null;
+		  function touchStart(event) {
+			   event.preventDefault();
+			   var touch = event.changedTouches[0];
+			   	if(obj.offsetLeft<oTarget.offsetLeft)
+				{
+					 iMax =getLeft(oTarget)-obj.offsetWidth;
+					 Min=0;
+				}else
+				{
+					  iMax =oParent.offsetWidth+getLeft(oParent);
+					  Min=oTarget.offsetLeft+oTarget.offsetWidth;
+				}
+               DisX=touch.pageX-this.offsetLeft;
+		  }
+		   
+		  // add touch start listener
+		  obj.addEventListener("touchstart", touchStart, false);
+		  
+		  function touchMove(event) {
+			    event.preventDefault();
+				 var touch = event.changedTouches[0];
+				 var L = touch.pageX-DisX;
+			  	if(obj.offsetLeft<oTarget.offsetLeft)
+				{
+					if ( L < Min ) {
+					   L = Min;
+					} else if ( touch.pageX > iMax) {
+						L =iMax-getLeft(oParent);
+					}
+					var iMaxLeft = oParent.offsetWidth - 2*obj.offsetWidth;
+					var iScale =L/iMaxLeft;
+				}else
+				{
+					if ( L < Min ) {
+					   L = Min;
+					} else if ( touch.pageX > iMax) {
+						L = oParent.offsetWidth- obj.offsetWidth;
+					}
+					var iMaxLeft = oParent.offsetWidth - 2*obj.offsetWidth;
+					var iScale =(L-obj.offsetWidth)/iMaxLeft;
+				}
+			   obj.style.left = L+"px";
+			   if(iScale>1)
+				{
+					iScale=1;
+				}
+			   count.value=parseFloat(parseInt(iScale*Scan*value)/Scan).toLocaleString();
+			   //document.title=iScale;
+				   
+		  }
+		   
+		  obj.addEventListener("touchmove", touchMove, false);
+		  
+		  function touchEnd(event) {}
+		  obj.addEventListener("touchend", touchEnd, false);
+	  
+	  }
+	  
+	  function getLeft(obj) {
+				var iLeft = 0;
+				while(obj) {
+					iLeft += obj.offsetLeft;
+					obj = obj.offsetParent;
+				}
+				return iLeft;
+	   }
+
+}
+</script>
+</head>
+
+<body>
+    <div id="fiterCarats">
+    	<div id="div2"></div>
+        <div id="div22"></div>
+        <div id="CaratsValuePlace">
+           <input value="0" type="text" id="count1">
+           <input value="15" type="text" id="count2">
+        </div>
+    </div>
+    
+    <div id="fiterPrice">
+    	<div id="div7"></div>
+        <div id="div8"></div>
+        <div id="PriceValuePlace">
+              <input value="0" type="text" id="count3">
+              <input value="50000" type="text" id="count4">
+        </div>
+     </div>
+</body>
+</html>
