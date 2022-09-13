@@ -1,0 +1,251 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+body{ padding:100px; margin:0 auto; width:1000px;}
+#fiterCarats {width:210px; height:60px; position:relative;}
+#div2 {width:20px; height: 30px; background: blue; position: absolute; left:0; top:-6px;}
+#div22 {width:20px; height: 30px;background: yellow; position: absolute; left:191px;top:-6px;}
+#CaratsValuePlace{width:210px; height:30px;position: absolute; left:0; top:26px;}
+
+/*.el-select__tags {
+  position: absolute;
+  line-height: normal;
+  white-space: normal;
+  z-index: 1;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.mul-select-select .el-select-dropdown__item {
+  padding: 0;
+}
+.mul-select-select .el-select-dropdown__item .sRow {
+  float: left;
+  padding: 0 20px;
+}
+.mul-select-select .el-select-dropdown__item .uploadProtocol {
+  float: none;
+  background: #bcdbf8;
+  color: #fff;
+}
+.mul-select-wrap {
+  width: 100%;
+  position: relative;
+  z-index: 99999;
+}
+.mul-select-wrap .el-input__inner {
+  background: #fff;
+}
+.mul-select-wrap .el-select2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+}
+.mul-select-wrap .select-mulselect-fixed .el-select__tags > span > span {
+  background: #94979a;
+  display: inline-block;
+  border-radius: 14px;
+  height: 20px;
+  color: #fff;
+  margin-right: 4px;
+  margin-top: 4px;
+}
+.mul-select-wrap .select-mulselect-fixed .el-select__tags > span > span > span {
+  height: 20px;
+  padding: 0 6px;
+  font-size: 12px;
+  cursor: pointer;
+  border-right: 1px solid #fff;
+}
+.mul-select-wrap .select-mulselect-fixed .el-select__tags > span > span .el-tag__close.el-icon-close {
+  background: none;
+  padding-right: 20px;
+  font-size: 14px;
+}
+.mul-select-wrap .disabled .el-select__tags > span > span > span {
+  cursor: default;
+  border-right: none;
+}
+.mul-select-wrap .select-mulselect-fixed2 .el-select__tags > span > span {
+  position: relative;
+  margin-right: 10px;
+}
+.mul-select-wrap .select-mulselect-fixed2 .el-select__tags > span > span::after {
+  content: "＞";
+  position: absolute;
+  top: 0;
+  font-size: 13px;
+  right: -16px;
+  color: #4196f3;
+}
+.mul-select-wrap .select-mulselect-fixed2 .el-select__tags > span > span:last-child::after {
+  content: "";
+}
+.mul-select-wrap .noOrder .el-select__tags > span > span::after {
+  content: "";
+}
+.mul-select-wrap .select-mulselect-float {
+  height: 36px;
+  line-height: 36px;
+}
+.mul-select-wrap .select-mulselect-float .checkIco {
+  float: right;
+  margin-right: -10px;
+  font-size: 16px;
+  color: #dfe0e2;
+}
+.mul-select-wrap .select-mulselect-float .upIco {
+  width: 30px;
+  font-size: 16px;
+}
+.mul-select-wrap .select-mulselect-float .downIco {
+  width: 30px;
+  font-size: 16px;
+}
+.mul-select-wrap .select-mulselect-float::after {
+  position: absolute;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  font-family: element-icons;
+  content: "\E611";
+  font-size: 12px;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  background: #dfe0e1;
+  line-height: 20px;
+  border-radius: 50%;
+  text-align: center;
+  top: 8px;
+  color: #fff;
+}
+.mul-select-wrap .select-mulselect-float.selected::after {
+  background: #4196f3;
+}
+*/
+
+</style> 
+<script>
+window.onload =function(){ 
+  drag("div2");
+	drag("div22");
+	  	
+  function drag(obj) {
+		// var oTarget = document.getElementById(target);
+		// var oParent = document.getElementById(parent);
+		var obj = document.getElementById(obj);
+		
+		obj.onmousedown = function(ev) {
+			var ev = ev || event;
+			// if(obj.offsetLeft<oTarget.offsetLeft)
+			// 	{
+			// 		var iMax =getLeft(oTarget)-obj.offsetWidth
+			// 		var Min=0;
+			// 	}else
+			// 	{
+			// 		var iMax =oParent.offsetWidth+getLeft(oParent)
+			// 		var Min=oTarget.offsetLeft+oTarget.offsetWidth
+			// 	}
+			
+			 var disX =ev.clientX- this.offsetLeft;
+			 
+			if ( obj.setCapture ) {
+				obj.setCapture();
+			}
+			
+			document.onmousemove = function(ev) {
+				var ev = ev || event;
+				
+				var L = ev.clientX - disX;
+				// if(obj.offsetLeft<oTarget.offsetLeft)
+				// {
+				// 	if ( L < Min ) {
+				// 	   L = Min;
+				// 	} else if ( ev.clientX > iMax) {
+				// 		L =iMax-getLeft(oParent);
+				// 	}
+				// 	var iMaxLeft = oParent.offsetWidth - 2*obj.offsetWidth;
+				// 	var iScale =L/iMaxLeft;
+				// }else
+				// {
+				// 	if ( L < Min ) {
+				// 	   L = Min;
+				// 	} else if ( ev.clientX > iMax) {
+				// 		L = oParent.offsetWidth- obj.offsetWidth;
+				// 	}
+				// 	var iMaxLeft = oParent.offsetWidth - 2*obj.offsetWidth;
+				// 	var iScale =(L-obj.offsetWidth)/iMaxLeft;
+				// }
+				obj.style.left = L + 'px';
+			}
+			
+			document.onmouseup = function() {
+				document.onmousemove = document.onmouseup = null;  
+				// 释放全局捕获 releaseCapture();
+				if ( obj.releaseCapture ) {
+					obj.releaseCapture();
+				}
+			}
+			return false;
+		}
+	}
+	  
+	function getLeft(obj) {
+		var iLeft = 0
+		while(obj) {
+			iLeft += obj.offsetLeft
+			obj = obj.offsetParent
+		}
+		return iLeft
+	 }
+
+}
+</script>
+</head>
+
+<body>
+<div id="mulselectId" class="mul-select-wrap">
+	<div class="el-select select-mulselect-fixed select-mulselect-fixed2 el-select--small noOrder">
+		<div class="el-select__tags" style="width: 100%; max-width: 414px;">
+			<span>
+				<span class="el-tag el-tag--info el-tag--mini">
+					<span class="el-select__tags-text">周杰伦</span>
+					<i class="el-tag__close el-icon-close"></i>
+				</span>
+				<span class="el-tag el-tag--info el-tag--mini">
+					<span class="el-select__tags-text">宋祖儿</span>
+					<i class="el-tag__close el-icon-close"></i>
+				</span>
+			</span>
+		</div>
+		<div class="el-input el-input--small el-input--suffix">
+			<input type="text" readonly="readonly" autocomplete="off" placeholder="" class="el-input__inner" style="height: 32px;">
+			<span class="el-input__suffix">
+				<span class="el-input__suffix-inner">
+				  <i class="el-select__caret el-input__icon el-icon-arrow-up"></i>
+				</span>
+			</span>
+		</div>
+	</div>
+</div>
+
+<div id="fiterCarats" style="margin-top: 60px;">
+	<div id="div2"></div>
+  <div id="div22"></div>
+</div>
+</body>
+</html>
