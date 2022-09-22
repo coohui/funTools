@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title></title>
+<style>
+div{
+	cursor: pointer;
+}
+</style> 
+<script>
+window.onload = function(){
+  let oBtn = document.getElementsByClassName('btn')
+  // 浏览器的地址栏会显示new.html，但并不会跳转到new.html，
+  // 甚至并不会去检查new.html存不存在，只是加入一个最新的历史记录项。
+  // 此时history中会有两个记录。假如你此时点击页面上的link跳转到另外一个页面后，
+  // 点击浏览器的后退按钮，则url会变成new.html，
+  // 如果此前的index.html的页面浏览器有缓存的话会显示index.html的内容，
+  // 否则会发起请求new.html。如果再次点后退，url会变成index.html
+  oBtn[0].onclick = () => {
+	// history.pushState(null, null, 'new.html?page=4')
+	history.pushState(null, null, '?page=4')
+  }
+  // 浏览器的地址栏也会显示new.html，区别是history中只有当前new.html的记录，而index.html的记录已被替换掉
+  oBtn[1].onclick = () => {
+	// history.replaceState(null, null, 'new.html?a=6&b=9')
+	history.replaceState(null, null, '?a=6&b=9')
+  }
+}
+</script>
+</head>
+<body>
+<div class="btn">更改浏览器参数</div><br/>
+<div class="btn">更改浏览器参数2</div><br/>
+
+</body>
+</html>
