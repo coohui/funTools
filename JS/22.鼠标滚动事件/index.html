@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title></title>
+<style>
+
+</style> 
+<script>
+window.onload =function(){
+	//滚轮事属于鼠标事件 只是滚轮兼容性不一样
+	//滚轮事件直接加给文档
+	document.onmousewheel=function(){
+		//注意 wheelDelta不是date
+		//此方法不兼容火狐浏览器
+		console.log(event.wheelDelta);
+		if(event.wheelDelta>0){
+			console.log("向上滚动");
+		}
+		if(event.wheelDelta<0){
+			console.log("向下滚动");
+		}
+	}
+	//如何兼容火狐浏览器
+	//利用
+	document.addEventListener("DOMMouseScroll",function(e){
+		//火狐浏览器 事件在参数部分就是e
+		console.log("火狐滚轮事件");
+		//滚动值
+		console.log(e.detail);
+		if(e.detail>0){
+			console.log("火狐滚轮事件向下滚动");
+		}else{
+			console.log("火狐滚轮事件向上滚动");
+		}//正负值与其他浏览器相反
+		//尽量以正负值判断上下滚轮
+	});
+}
+</script>
+</head>
+
+<body>
+</body>
+</html>
