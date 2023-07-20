@@ -18,13 +18,13 @@ window.onload = function(){
   // 如果此前的index.html的页面浏览器有缓存的话会显示index.html的内容，
   // 否则会发起请求new.html。如果再次点后退，url会变成index.html
   oBtn[0].onclick = () => {
-	// history.pushState(null, null, 'new.html?page=4')
-	history.pushState(null, null, '?page=4')
+    // history.pushState(null, null, 'new.html?page=4')
+    history.pushState(null, null, '?page=4')
   }
   // 浏览器的地址栏也会显示new.html，区别是history中只有当前new.html的记录，而index.html的记录已被替换掉
   oBtn[1].onclick = () => {
-	// history.replaceState(null, null, 'new.html?a=6&b=9')
-	history.replaceState(null, null, '?a=6&b=9')
+    // history.replaceState(null, null, 'new.html?a=6&b=9')
+    history.replaceState(null, null, '?a=6&b=9')
   }
 }
 </script>
